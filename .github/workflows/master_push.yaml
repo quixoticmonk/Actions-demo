@@ -1,3 +1,5 @@
+name: Jobs on Push to master
+
 on:
   push:
     branches:
