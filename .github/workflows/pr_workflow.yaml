@@ -2,18 +2,26 @@ name: PR workflow
 
 on:
   pull_request:
-    branches: [master, develop]
+    branches: [master, develop,'releases/**']
+
 env:
   NODE_VERSION: 8.x
+
+defaults:
+  run:
+    shell: bash
+
 jobs:
   build_and_test:
     runs-on: ["ubuntu-latest"]
     steps:
+      - name: Triggered event for logs
+        run: echo The ${{ github.event_name }} event triggered this step.
       - uses: actions/checkout@v2
       - name: Uses Node.js version ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ env.NODE_VERSION }}
-      - run: |
+      - name: Clean install dependencies
+        run: |
           npm ci
-          npm test
