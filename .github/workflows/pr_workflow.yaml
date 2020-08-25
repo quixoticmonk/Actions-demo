@@ -2,9 +2,15 @@ name: PR workflow
 
 on:
   pull_request:
-    branches: [master, develop]
+    branches: [master, develop,'releases/**']
+
 env:
   NODE_VERSION: 8.x
+
+defaults:
+  run:
+    shell: bash
+
 jobs:
   build_and_test:
     runs-on: ["ubuntu-latest"]
