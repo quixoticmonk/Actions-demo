@@ -13,12 +13,10 @@ jobs:
           node-version: 12
       - run: npm ci
   test:
-    runs-on: ubuntu-latest
     steps:
       - run: npm test
       - run: echo "test"
   test2:
-    runs-on: ubuntu-latest
     steps:
       - run: npm test
       - run: echo "test2"      
