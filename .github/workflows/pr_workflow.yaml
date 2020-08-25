@@ -4,14 +4,18 @@ on:
   pull_request:
     branches: [master, develop]
 
-
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node_version: [8,x,10.x,12.x]
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Uses Node.js version ${{ matrix.node_version }}
+        uses: actions/setup-node@v1
         with:
-          node-version: 12
-      - run: npm ci
-      - run: npm test
+          node-version: ${{ matrix.node_version }}
+      - run: |
+        npm ci
+        npm test
